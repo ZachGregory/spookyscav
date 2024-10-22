@@ -224,7 +224,8 @@ function viewSwitch(){
     <!-- <button onclick="viewSwitch();">Change View</button><br> -->
         Your team:
         {{ team.display_name }}<br>
-        Free hints: {{ team.free_hints }}<br>
+        <p class="nosifer-regular" style="text-shadow: 0px 0px 12px rgba(105, 229, 97, 1); font-size: x-large;">Free hints: {{ team.free_hints }}</p>
+
         {% if bypass %}
             <h1 class="text-red-600 text-xl">Warning: Scav rule bypass is enabled!</h1>
         {% endif %}

@@ -5,10 +5,12 @@
 {% block body %}
     <div class="p-6">
         <div class="space-y-4 mt-4 text-center">
+            <p class="nosifer-regular" style="text-shadow: 0px 0px 12px rgba(105, 229, 97, 1); font-size: x-large; text-align: left;">Free hints: {{ team.free_hints }}</p>
             {% if bypass %}
                 <h1 class="text-red-600 text-xl">Warning: Scav rule bypass is enabled!</h1>
             {% endif %}
             <div class="rounded bg-background shadow max-w-5xl mx-auto text-center" style="margin: auto;">
+                <p>{{ puzzle.stream }}</p>
                 <h2>Clue: {{ puzzle.name }}</h2>
                 {% if puzzle.puzzle_text %}
                 {% if puzzle.puzzle_is_link %}

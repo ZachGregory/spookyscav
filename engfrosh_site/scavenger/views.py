@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 import logging
 import json
 import base64
+from math import isclose
 from scavenger.tree import generate_tree
 
 logger = logging.getLogger("engfrosh_site.scavenger.views")
@@ -112,6 +113,7 @@ def puzzle_view(request: HttpRequest, slug: str) -> HttpResponse:
     if request.method == "GET":
 
         context = {
+            "team": team,
             "puzzle": puz,
             "view_only": not bypass and puz.is_completed_for_team(team) or not team.scavenger_enabled,
             "scavenger_enabled_for_team": team.scavenger_enabled,
@@ -141,6 +143,9 @@ def puzzle_view(request: HttpRequest, slug: str) -> HttpResponse:
         correct, stream_completed, next_puzzle, require_verification_photo = puz.check_team_guess(
             team, req_dict["answer"], bypass)
         if correct:
+            if puz.stream.name == "Online" and isclose(0, puz.order % 3):    #Grant hints every 3 online clues (BREAKS WHEN THERE IS MULTI ANSWER PUZZLES)
+                team.free_hints += 2    #Add two clues
+                team.save()
             DiscordChannel.send_to_updates_channels(
                 f"""{team.display_name} has submitted an answer for puzzle {puz.name} (order {puz.order})!""")
         if require_verification_photo:

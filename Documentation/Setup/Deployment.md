@@ -100,7 +100,7 @@ cd ~/spookyscav-docker/engfrosh-site/
 Now copy `environment.example` to `environment` and fill in all variables
 Also copy `credentials.example` to `credentials` and fill in all variables
 
-The above does not work. Set the secret key instead in engfrosh-docker/engfrosh-site/Dockerfile with `ENV DJANGO_SECRET_KEY="your-actual-secret-key"`
+The above does not work. Set the secret key instead in spookyscav-docker/engfrosh-site/Dockerfile with `ENV DJANGO_SECRET_KEY="your-actual-secret-key"`
 
 You can use python to generate a new secret key with: 
 ```sh
